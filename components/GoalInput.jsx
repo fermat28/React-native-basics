@@ -1,24 +1,25 @@
-import React from 'react';
-import { StyleSheet, Text, Button, View, TextInput, FlatList } from 'react-native';
+import React , {useState} from 'react';
+import { StyleSheet, Button, View, TextInput, Modal } from 'react-native';
 
-
-const GoalInput = props => {
-
-    return (
-
-      <View style={styles.container}>
+const GoalInput = (props) => {
+ const [entrerdGoal, setEnteredGoal] = useState('');
+  const goalInputHandler = (enteredText) => {
+    setEnteredGoal(enteredText);
+  };
+  return (
+    <Modal >
+    <View style={styles.container}>
       <TextInput
         placeholder="Course Goal"
         style={styles.button}
-        onChangeText={goalInputHandler} 
+        onChangeText={goalInputHandler}
         value={entrerdGoal}
       />
-      <Button title="ADD" onPress={addGoalHandler} />
+      <Button title="ADD" onPress={() => props.onadd(entrerdGoal)} />
     </View>
-
-    );
-
-}
+    </Modal>
+  );
+};
 export default GoalInput;
 
 const styles = StyleSheet.create({
@@ -33,5 +34,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     width: '70%',
-  }
+  },
 });
